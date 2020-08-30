@@ -1,9 +1,10 @@
 'use strict';
-const canvas = document.getElementById("jsCanvas");
+const canvas = document.getElementById('jsCanvas');
 const ctx = canvas.getContext('2d');
 const colorBtn = document.querySelectorAll('.controls__color');
 const range = document.getElementById('jsRange');
 const mode = document.getElementById('jsMode');
+const saveBtn = document.getElementById('jsSave');
 ctx.strokeStyle = "#2c2c2c";
 
 ctx.fillStyle = "white";
@@ -70,6 +71,14 @@ function handleCM(e) {
     e.preventDefault();
 }
 
+function handleSaveClick(e) {
+    const image = canvas.toDataURL("image/jpeg");  // default: png
+    const link = document.createElement('a');
+    link.href = image;
+    link.download = "PaintJS";
+    link.click();
+}
+
 if(canvas) {
     canvas.addEventListener('mousemove',onMouseMove);
     canvas.addEventListener('mousedown', onMouseDown);
@@ -85,4 +94,8 @@ if(range)
 
 if(mode) {
     mode.addEventListener('click', onTypeChange);
+}
+
+if(saveBtn) {
+    saveBtn.addEventListener('click', handleSaveClick)
 }
