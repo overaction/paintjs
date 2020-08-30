@@ -6,6 +6,8 @@ const range = document.getElementById('jsRange');
 const mode = document.getElementById('jsMode');
 ctx.strokeStyle = "#2c2c2c";
 
+ctx.fillStyle = "white";
+ctx.fillRect(0,0,700,700);
 console.log(canvas.style.backgroundColor);
 canvas.width = 700;
 canvas.height = 700;
@@ -42,7 +44,8 @@ function onPaintChange(e) {
 }
 
 function onFillChange(e) {
-    canvas.style.backgroundColor = e.target.style.backgroundColor;
+    ctx.fillStyle = e.target.style.backgroundColor;
+    ctx.fillRect(0,0,700,700);
 }
 
 function onRangeChange(e) {
@@ -63,11 +66,16 @@ function onTypeChange(e) {
     else e.target.innerText = 'FILL';
 }
 
+function handleCM(e) {
+    e.preventDefault();
+}
+
 if(canvas) {
     canvas.addEventListener('mousemove',onMouseMove);
     canvas.addEventListener('mousedown', onMouseDown);
     canvas.addEventListener('mouseup', stopPainting);
     canvas.addEventListener('mouseleave', stopPainting);
+    canvas.addEventListener('contextmenu', handleCM);
 }
 
 colorBtn.forEach(color => color.addEventListener('click', typeAction));
