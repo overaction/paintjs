@@ -2,9 +2,8 @@
 const canvas = document.getElementById("jsCanvas");
 const ctx = canvas.getContext('2d');
 const colorBtn = document.querySelectorAll('.controls__color');
-console.log(colorBtn);
+const range = document.getElementById('jsRange');
 ctx.strokeStyle = "#2c2c2c";
-ctx.lineWidth = 2.5;
 
 canvas.width = 700;
 canvas.height = 700;
@@ -39,6 +38,10 @@ function onColorChange(e) {
     ctx.strokeStyle = e.target.dataset.filter;
 }
 
+function onRangeChange(e) {
+    ctx.lineWidth = range.value;
+}
+
 if(canvas) {
     canvas.addEventListener('mousemove',onMouseMove);
     canvas.addEventListener('mousedown', onMouseDown);
@@ -47,3 +50,6 @@ if(canvas) {
 }
 
 colorBtn.forEach(color => color.addEventListener('click', onColorChange));
+
+if(range)
+    range.addEventListener('click', onRangeChange);
